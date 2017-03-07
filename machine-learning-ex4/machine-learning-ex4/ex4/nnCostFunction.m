@@ -75,9 +75,8 @@ for i = 1:m
 
    expected(y(i)) = 1
    
-   for k = 1:num_labels
-        preJ = preJ +( -(expected(k))*log(a2(i,k)) - (1-expected(k))*log(1-a2(i,k)))
-   end
+preJ = preJ + sum(-(expected).*log(a2(i,:))) - sum((1-expected).*log(1-a2(i,:)))
+
 end
 
 J = preJ / m
