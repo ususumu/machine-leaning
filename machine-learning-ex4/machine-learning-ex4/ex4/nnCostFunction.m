@@ -61,11 +61,26 @@ Theta2_grad = zeros(size(Theta2));
 %               the regularization separately and then add them to Theta1_grad
 %               and Theta2_grad from Part 2.
 %
+%Xd = [ones(m,1) X]
+l1 = [ones(m,1) X]*Theta1'
+a1 = sigmoid(l1)
 
+l2 = [ones(m,1) a1]*Theta2'
+a2 = sigmoid(l2)
 
+%preJ = sum(-(expected.*log(a2)) - (1-expected).*log(1-a2))/m
+preJ = 0
+for i = 1:m
+   expected = zeros(1,num_labels)
 
+   expected(y(i)) = 1
+   
+   for k = 1:num_labels
+        preJ = preJ +( -(expected(k))*log(a2(i,k)) - (1-expected(k))*log(1-a2(i,k)))
+   end
+end
 
-
+J = preJ / m
 
 
 
@@ -85,6 +100,7 @@ Theta2_grad = zeros(size(Theta2));
 % =========================================================================
 
 % Unroll gradients
+
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
 
 
