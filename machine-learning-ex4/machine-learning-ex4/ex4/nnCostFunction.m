@@ -81,10 +81,16 @@ end
 
 J = preJ / m
 
+sTheta1 = Theta1.^2
+sTheta1(:,1) = 0
+
+sTheta2 = Theta2.^2
+sTheta2(:,1) = 0
 
 
+reg = (lambda/(2*m))*(sum(sTheta1(:)) + sum(sTheta2(:)))
 
-
+J = J + reg
 
 
 
