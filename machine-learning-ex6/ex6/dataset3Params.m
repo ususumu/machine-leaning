@@ -23,9 +23,29 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+cndC  =[ 0.01 0.03 0.1 0.3 1,3 10 30]
+cndS  =[ 0.01 0.03 0.1 0.3 1,3 10 30]
 
+err = 1e+5
 
+for i = 1:length(cndC)
+    
+    for j = 1:length(cndS)
 
+        model= svmTrain(X, y, cndC(i), @(x1, x2) gaussianKernel(x1, x2, cndS(j))); 
+        predictions = svmPredict(model, Xval)
+
+        cErr = mean(double(predictions ~= yval))
+        
+        if err > cErr
+            err = cErr
+            
+            C = cndC(i)
+            sigma = cndS(j)
+        end
+    end
+    
+end
 
 
 
