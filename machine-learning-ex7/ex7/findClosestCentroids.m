@@ -21,11 +21,21 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
+l = size(X,1)
 
+for i = 1:l
+    wkidx = 0
+    dst = 1e+5
+    for j = 1:K
 
-
-
-
+        wkDst = sum((X(i,:) - centroids(j,:)).^2) 
+        
+        if dst > wkDst
+           dst = wkDst
+           idx(i) = j
+        end
+    end
+end
 
 % =============================================================
 
