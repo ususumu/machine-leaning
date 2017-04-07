@@ -40,11 +40,11 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 
+predict = (X*Theta').*R    
 
+cost = ((predict - Y).^2)/2
 
-
-
-
+J = sum(cost(:))
 
 
 
