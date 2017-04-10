@@ -46,9 +46,10 @@ cost = ((predict - Y).^2)/2
 
 J = sum(cost(:))
 
+pgrad = (predict - Y)
 
-
-
+X_grad = pgrad*Theta
+Theta_grad = pgrad'*X
 
 
 
